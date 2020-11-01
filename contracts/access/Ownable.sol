@@ -2,6 +2,7 @@
 
 pragma solidity ^0.6.0;
 
+import "../utils/Address.sol";
 import "../GSN/Context.sol";
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -16,6 +17,9 @@ import "../GSN/Context.sol";
  * the owner.
  */
 contract Ownable is Context {
+    
+    using Address for address;
+    
     address private _owner;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
