@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity ^0.6.0;
+import "hardhat/console.sol";
 
-import "..\math\SafeMath.sol";
+import "../math/SafeMath.sol";
 
 /**
  * @dev String operations.
@@ -121,7 +122,7 @@ library Strings {
         return address(addr);
     }
 
-    function toUint(string self) constant internal returns (uint result) {
+    function toUint(string self) pure internal returns (uint result) {
         bytes memory b = bytes(self);
         uint i;
         result = 0;

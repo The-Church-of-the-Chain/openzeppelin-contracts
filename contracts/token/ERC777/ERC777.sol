@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity ^0.6.0;
+import "hardhat/console.sol";
 
 import "../../GSN/Context.sol";
 import "./IERC777.sol";
@@ -67,14 +68,14 @@ contract ERC777 is Context, IERC777, IERC20 {
      * @dev `defaultOperators` may be an empty array.
      */
     constructor(
-        string memory name,
-        string memory symbol,
-        address[] memory defaultOperators
+        string memory name_,
+        string memory symbol_,
+        address[] memory defaultOperators_
     ) public {
-        _name = name;
-        _symbol = symbol;
+        _name = name_;
+        _symbol = symbol_;
 
-        _defaultOperatorsArray = defaultOperators;
+        _defaultOperatorsArray = defaultOperators_;
         for (uint256 i = 0; i < _defaultOperatorsArray.length; i++) {
             _defaultOperators[_defaultOperatorsArray[i]] = true;
         }

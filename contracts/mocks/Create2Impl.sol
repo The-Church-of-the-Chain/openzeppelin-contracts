@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity ^0.6.0;
+import "hardhat/console.sol";
 
 import "../utils/Create2.sol";
 import "../introspection/ERC1820Implementer.sol";

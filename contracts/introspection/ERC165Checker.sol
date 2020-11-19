@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity ^0.6.2;
+import "hardhat/console.sol";
 
 /**
  * @dev Library used to query support of an interface declared via {IERC165}.

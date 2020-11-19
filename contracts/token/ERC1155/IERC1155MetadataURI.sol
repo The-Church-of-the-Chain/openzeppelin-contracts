@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity ^0.6.2;
+import "hardhat/console.sol";
 
 import "./IERC1155.sol";
 

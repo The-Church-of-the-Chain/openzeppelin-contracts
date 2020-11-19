@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
 
-pragma solidity 0.7.0;
-
+import "hardhat/console.sol";
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
