@@ -3,14 +3,14 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../../GSN/Context.sol";
+import "../../security/Context.sol";
 import "./ERC721.sol";
 
 /**
  * @title ERC721 Burnable Token
  * @dev ERC721 Token that can be irreversibly burned (destroyed).
  */
-abstract contract ERC721Burnable is Context, ERC721 {
+abstract contract ERC721Burnable is ERC721 {
     /**
      * @dev Burns `tokenId`. See {ERC721-_burn}.
      *
@@ -20,7 +20,7 @@ abstract contract ERC721Burnable is Context, ERC721 {
      */
     function burn(uint256 tokenId) public virtual {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721Burnable: caller is not owner nor approved");
+        require(_isApprovedOrOwner(Context._msgSender(), tokenId), "ERC721Burnable: caller is not owner nor approved");
         _burn(tokenId);
     }
 }

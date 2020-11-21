@@ -29,11 +29,11 @@ contract GSNRecipientMock is ContextMock, GSNRecipient {
         return _upgradeRelayHub(newRelayHub);
     }
 
-    function _msgSender() internal override(Context, GSNRecipient) view virtual returns (address payable) {
+    function _msgSender() internal override( GSNRecipient ) view virtual returns (address payable) {
         return GSNRecipient._msgSender();
     }
 
-    function _msgData() internal override(Context, GSNRecipient) view virtual returns (bytes memory) {
+    function _msgData() internal override( GSNRecipient ) view virtual returns (bytes memory) {
         return GSNRecipient._msgData();
     }
 }

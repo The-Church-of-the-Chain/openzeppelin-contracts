@@ -3,14 +3,14 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 import "../token/ERC777/IERC777.sol";
 import "../token/ERC777/IERC777Sender.sol";
 import "../token/ERC777/IERC777Recipient.sol";
 import "../introspection/IERC1820Registry.sol";
 import "../introspection/ERC1820Implementer.sol";
 
-contract ERC777SenderRecipientMock is Context, IERC777Sender, IERC777Recipient, ERC1820Implementer {
+contract ERC777SenderRecipientMock is IERC777Sender, IERC777Recipient, ERC1820Implementer {
     event TokensToSendCalled(
         address operator,
         address from,
@@ -55,7 +55,7 @@ contract ERC777SenderRecipientMock is Context, IERC777Sender, IERC777Recipient, 
             revert();
         }
 
-        IERC777 token = IERC777(_msgSender());
+        IERC777 token = IERC777(Context._msgSender());
 
         uint256 fromBalance = token.balanceOf(from);
         // when called due to burn, to will be the zero address, which will have a balance of 0
@@ -86,7 +86,7 @@ contract ERC777SenderRecipientMock is Context, IERC777Sender, IERC777Recipient, 
             revert();
         }
 
-        IERC777 token = IERC777(_msgSender());
+        IERC777 token = IERC777(Context._msgSender());
 
         uint256 fromBalance = token.balanceOf(from);
         // when called due to burn, to will be the zero address, which will have a balance of 0

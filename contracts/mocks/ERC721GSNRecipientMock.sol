@@ -13,20 +13,19 @@ import "../GSN/GSNRecipientSignature.sol";
  */
 contract ERC721GSNRecipientMock is ERC721, GSNRecipient, GSNRecipientSignature {
     constructor(string memory name, string memory symbol, address trustedSigner)
-        public
         ERC721(name, symbol)
         GSNRecipientSignature(trustedSigner)
     { }
 
     function mint(uint256 tokenId) public {
-        _mint(_msgSender(), tokenId);
+        _mint(Context._msgSender(), tokenId);
     }
 
-    function _msgSender() internal view override(Context, GSNRecipient) returns (address payable) {
+    function _msgSender() internal view override( GSNRecipient ) returns (address payable) {
         return GSNRecipient._msgSender();
     }
 
-    function _msgData() internal view override(Context, GSNRecipient) returns (bytes memory) {
+    function _msgData() internal view override( GSNRecipient ) returns (bytes memory) {
         return GSNRecipient._msgData();
     }
 }

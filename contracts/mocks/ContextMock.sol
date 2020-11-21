@@ -3,19 +3,19 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 
-contract ContextMock is Context {
+contract ContextMock {
     event Sender(address sender);
 
     function msgSender() public {
-        emit Sender(_msgSender());
+        emit Sender(Context._msgSender());
     }
 
     event Data(bytes data, uint256 integerValue, string stringValue);
 
     function msgData(uint256 integerValue, string memory stringValue) public {
-        emit Data(_msgData(), integerValue, stringValue);
+        emit Data(Context._msgData(), integerValue, stringValue);
     }
 }
 

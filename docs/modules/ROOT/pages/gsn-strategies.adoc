@@ -22,7 +22,7 @@ A GSN recipient contract needs the following to work:
 
 Depositing funds for the GSN recipient contract can be done via the https://gsn.openzeppelin.com/recipients[GSN Dapp tool] or programmatically with xref:gsn-helpers::api.adoc#javascript_interface[*OpenZeppelin GSN Helpers*].
 
-The actual user's `msg.sender` and `msg.data` can be obtained safely via xref:api:GSN.adoc#GSNRecipient-_msgSender--[`_msgSender()`] and xref:api:GSN.adoc#GSNRecipient-_msgData--[`_msgData()`] of xref:api:GSN.adoc#GSNRecipient[`GSNRecipient`].
+The actual user's `msg.sender` and `msg.data` can be obtained safely via xref:api:GSN.adoc#GSNRecipient-Context._msgSender--[`Context._msgSender()`] and xref:api:GSN.adoc#GSNRecipient-_msgData--[`_msgData()`] of xref:api:GSN.adoc#GSNRecipient[`GSNRecipient`].
 
 Deciding how to approve and reject relayed calls is a bit more complex. Chances are you probably want to choose which users can use your contracts via the GSN and potentially charge them for it, like a bouncer at a nightclub. We call these _GSN strategies_.
 
@@ -117,11 +117,11 @@ contract MyContract is GSNRecipientERC20Fee, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
     constructor() public GSNRecipientERC20Fee("FeeToken", "FEE") {
-        _setupRole(MINTER_ROLE, _msgSender());
+        _setupRole(MINTER_ROLE, Context._msgSender());
     }
 
-    function _msgSender() internal view override(Context, GSNRecipient) returns (address payable) {
-        return GSNRecipient._msgSender();
+    function Context._msgSender() internal view override(Context, GSNRecipient) returns (address payable) {
+        return GSNRecipient.Context._msgSender();
     }
 
     function _msgData() internal view override(Context, GSNRecipient) returns (bytes memory) {
@@ -129,7 +129,7 @@ contract MyContract is GSNRecipientERC20Fee, AccessControl {
     }
 
     function mint(address account, uint256 amount) public {
-        require(hasRole(MINTER_ROLE, _msgSender()), "Caller is not a minter");
+        require(hasRole(MINTER_ROLE, Context._msgSender()), "Caller is not a minter");
         _mint(account, amount);
     }
 }

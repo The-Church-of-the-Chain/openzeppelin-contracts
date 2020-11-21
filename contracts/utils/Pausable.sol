@@ -3,7 +3,7 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 
 /**
  * @dev Contract module which allows children to implement an emergency stop
@@ -14,7 +14,7 @@ import "../GSN/Context.sol";
  * the functions of your contract. Note that they will not be pausable by
  * simply including this module, only once the modifiers are put in place.
  */
-contract Pausable is Context {
+contract Pausable {
     /**
      * @dev Emitted when the pause is triggered by `account`.
      */
@@ -30,7 +30,7 @@ contract Pausable is Context {
     /**
      * @dev Initializes the contract in unpaused state.
      */
-    constructor () internal {
+    constructor () {
         _paused = false;
     }
 
@@ -74,7 +74,7 @@ contract Pausable is Context {
      */
     function _pause() internal virtual whenNotPaused {
         _paused = true;
-        emit Paused(_msgSender());
+        emit Paused(Context._msgSender());
     }
 
     /**
@@ -86,6 +86,6 @@ contract Pausable is Context {
      */
     function _unpause() internal virtual whenPaused {
         _paused = false;
-        emit Unpaused(_msgSender());
+        emit Unpaused(Context._msgSender());
     }
 }
