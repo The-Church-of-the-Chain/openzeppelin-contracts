@@ -55,7 +55,7 @@ contract ERC777SenderRecipientMock is Context, IERC777Sender, IERC777Recipient, 
             revert();
         }
 
-        IERC777 token = IERC777(_msgSender());
+        IERC777 token = IERC777(Context._msgSender());
 
         uint256 fromBalance = token.balanceOf(from);
         // when called due to burn, to will be the zero address, which will have a balance of 0
@@ -86,7 +86,7 @@ contract ERC777SenderRecipientMock is Context, IERC777Sender, IERC777Recipient, 
             revert();
         }
 
-        IERC777 token = IERC777(_msgSender());
+        IERC777 token = IERC777(Context._msgSender());
 
         uint256 fromBalance = token.balanceOf(from);
         // when called due to burn, to will be the zero address, which will have a balance of 0

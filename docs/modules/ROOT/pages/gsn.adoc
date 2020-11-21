@@ -18,7 +18,7 @@ contract MyContract is GSNRecipient, ... {
 
 === `msg.sender` and `msg.data`
 
-There's only one extra detail you need to take care of when working with GSN recipient contracts: _you must never use `msg.sender` or `msg.data` directly_. On relayed calls, `msg.sender` will be `RelayHub` instead of your user! This doesn't mean however you won't be able to retrieve your users' addresses: `GSNRecipient` provides two functions, `_msgSender()` and `_msgData()`, which are drop-in replacements for `msg.sender` and `msg.data` while taking care of the low-level details. As long as you use these two functions instead of the original getters, you're good to go!
+There's only one extra detail you need to take care of when working with GSN recipient contracts: _you must never use `msg.sender` or `msg.data` directly_. On relayed calls, `msg.sender` will be `RelayHub` instead of your user! This doesn't mean however you won't be able to retrieve your users' addresses: `GSNRecipient` provides two functions, `Context._msgSender()` and `_msgData()`, which are drop-in replacements for `msg.sender` and `msg.data` while taking care of the low-level details. As long as you use these two functions instead of the original getters, you're good to go!
 
 WARNING: Third-party contracts you inherit from may not use these replacement functions, making them unsafe to use when mixed with `GSNRecipient`. If in doubt, head on over to our https://forum.openzeppelin.com/c/support[support forum].
 

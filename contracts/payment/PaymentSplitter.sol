@@ -60,7 +60,7 @@ contract PaymentSplitter is Context {
      * functions].
      */
     receive () external payable virtual {
-        emit PaymentReceived(_msgSender(), msg.value);
+        emit PaymentReceived(Context._msgSender(), msg.value);
     }
 
     /**

@@ -29,7 +29,7 @@ contract Ownable is Context {
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
     constructor () internal {
-        address msgSender = _msgSender();
+        address msgSender = Context._msgSender();
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);
     }
@@ -45,7 +45,7 @@ contract Ownable is Context {
      * @dev Throws if called by any account other than the owner.
      */
     modifier onlyOwner() {
-        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        require(_owner == Context._msgSender(), "Ownable: caller is not the owner");
         _;
     }
 

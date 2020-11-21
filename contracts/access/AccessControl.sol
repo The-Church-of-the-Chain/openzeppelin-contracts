@@ -134,7 +134,7 @@ abstract contract AccessControl is Context {
      * - the caller must have ``role``'s admin role.
      */
     function grantRole(bytes32 role, address account) public virtual {
-        require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to grant");
+        require(hasRole(_roles[role].adminRole, Context._msgSender()), "AccessControl: sender must be an admin to grant");
 
         _grantRole(role, account);
     }
@@ -149,7 +149,7 @@ abstract contract AccessControl is Context {
      * - the caller must have ``role``'s admin role.
      */
     function revokeRole(bytes32 role, address account) public virtual {
-        require(hasRole(_roles[role].adminRole, _msgSender()), "AccessControl: sender must be an admin to revoke");
+        require(hasRole(_roles[role].adminRole, Context._msgSender()), "AccessControl: sender must be an admin to revoke");
 
         _revokeRole(role, account);
     }
@@ -169,7 +169,7 @@ abstract contract AccessControl is Context {
      * - the caller must be `account`.
      */
     function renounceRole(bytes32 role, address account) public virtual {
-        require(account == _msgSender(), "AccessControl: can only renounce roles for self");
+        require(account == Context._msgSender(), "AccessControl: can only renounce roles for self");
 
         _revokeRole(role, account);
     }
@@ -206,13 +206,13 @@ abstract contract AccessControl is Context {
 
     function _grantRole(bytes32 role, address account) private {
         if (_roles[role].members.add(account)) {
-            emit RoleGranted(role, account, _msgSender());
+            emit RoleGranted(role, account, Context._msgSender());
         }
     }
 
     function _revokeRole(bytes32 role, address account) private {
         if (_roles[role].members.remove(account)) {
-            emit RoleRevoked(role, account, _msgSender());
+            emit RoleRevoked(role, account, Context._msgSender());
         }
     }
 }

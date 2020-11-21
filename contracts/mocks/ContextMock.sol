@@ -9,7 +9,7 @@ contract ContextMock is Context {
     event Sender(address sender);
 
     function msgSender() public {
-        emit Sender(_msgSender());
+        emit Sender(Context._msgSender());
     }
 
     event Data(bytes data, uint256 integerValue, string stringValue);

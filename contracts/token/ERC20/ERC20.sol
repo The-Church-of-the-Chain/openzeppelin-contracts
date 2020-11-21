@@ -114,7 +114,7 @@ contract ERC20 is Context, IERC20 {
      * - the caller must have a balance of at least `amount`.
      */
     function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
-        _transfer(_msgSender(), recipient, amount);
+        _transfer(Context._msgSender(), recipient, amount);
         return true;
     }
 
@@ -133,7 +133,7 @@ contract ERC20 is Context, IERC20 {
      * - `spender` cannot be the zero address.
      */
     function approve(address spender, uint256 amount) public virtual override returns (bool) {
-        _approve(_msgSender(), spender, amount);
+        _approve(Context._msgSender(), spender, amount);
         return true;
     }
 
@@ -152,7 +152,7 @@ contract ERC20 is Context, IERC20 {
      */
     function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
         _transfer(sender, recipient, amount);
-        _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
+        _approve(sender, Context._msgSender(), _allowances[sender][Context._msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
         return true;
     }
 
@@ -169,7 +169,7 @@ contract ERC20 is Context, IERC20 {
      * - `spender` cannot be the zero address.
      */
     function increaseAllowance(address spender, uint256 addedValue) public virtual returns (bool) {
-        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].add(addedValue));
+        _approve(Context._msgSender(), spender, _allowances[Context._msgSender()][spender].add(addedValue));
         return true;
     }
 
@@ -188,7 +188,7 @@ contract ERC20 is Context, IERC20 {
      * `subtractedValue`.
      */
     function decreaseAllowance(address spender, uint256 subtractedValue) public virtual returns (bool) {
-        _approve(_msgSender(), spender, _allowances[_msgSender()][spender].sub(subtractedValue, "ERC20: decreased allowance below zero"));
+        _approve(Context._msgSender(), spender, _allowances[Context._msgSender()][spender].sub(subtractedValue, "ERC20: decreased allowance below zero"));
         return true;
     }
 

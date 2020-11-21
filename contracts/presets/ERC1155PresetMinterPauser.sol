@@ -32,10 +32,10 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * deploys the contract.
      */
     constructor(string memory uri) public ERC1155(uri) {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _setupRole(DEFAULT_ADMIN_ROLE, Context._msgSender());
 
-        _setupRole(MINTER_ROLE, _msgSender());
-        _setupRole(PAUSER_ROLE, _msgSender());
+        _setupRole(MINTER_ROLE, Context._msgSender());
+        _setupRole(PAUSER_ROLE, Context._msgSender());
     }
 
     /**
@@ -48,7 +48,7 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(address to, uint256 id, uint256 amount, bytes memory data) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "ERC1155PresetMinterPauser: must have minter role to mint");
+        require(hasRole(MINTER_ROLE, Context._msgSender()), "ERC1155PresetMinterPauser: must have minter role to mint");
 
         _mint(to, id, amount, data);
     }
@@ -57,7 +57,7 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] variant of {mint}.
      */
     function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "ERC1155PresetMinterPauser: must have minter role to mint");
+        require(hasRole(MINTER_ROLE, Context._msgSender()), "ERC1155PresetMinterPauser: must have minter role to mint");
 
         _mintBatch(to, ids, amounts, data);
     }
@@ -72,7 +72,7 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC1155PresetMinterPauser: must have pauser role to pause");
+        require(hasRole(PAUSER_ROLE, Context._msgSender()), "ERC1155PresetMinterPauser: must have pauser role to pause");
         _pause();
     }
 
@@ -86,7 +86,7 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC1155PresetMinterPauser: must have pauser role to unpause");
+        require(hasRole(PAUSER_ROLE, Context._msgSender()), "ERC1155PresetMinterPauser: must have pauser role to unpause");
         _unpause();
     }
 

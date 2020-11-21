@@ -41,10 +41,10 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControl, ERC721Burnabl
      * See {ERC721-tokenURI}.
      */
     constructor(string memory name, string memory symbol, string memory baseURI) public ERC721(name, symbol) {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
+        _setupRole(DEFAULT_ADMIN_ROLE, Context._msgSender());
 
-        _setupRole(MINTER_ROLE, _msgSender());
-        _setupRole(PAUSER_ROLE, _msgSender());
+        _setupRole(MINTER_ROLE, Context._msgSender());
+        _setupRole(PAUSER_ROLE, Context._msgSender());
 
         _setBaseURI(baseURI);
     }
@@ -61,7 +61,7 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControl, ERC721Burnabl
      * - the caller must have the `MINTER_ROLE`.
      */
     function mint(address to) public virtual {
-        require(hasRole(MINTER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
+        require(hasRole(MINTER_ROLE, Context._msgSender()), "ERC721PresetMinterPauserAutoId: must have minter role to mint");
 
         // We cannot just use balanceOf to create the new tokenId because tokens
         // can be burned (destroyed), so we need a separate counter.
@@ -79,7 +79,7 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControl, ERC721Burnabl
      * - the caller must have the `PAUSER_ROLE`.
      */
     function pause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have pauser role to pause");
+        require(hasRole(PAUSER_ROLE, Context._msgSender()), "ERC721PresetMinterPauserAutoId: must have pauser role to pause");
         _pause();
     }
 
@@ -93,7 +93,7 @@ contract ERC721PresetMinterPauserAutoId is Context, AccessControl, ERC721Burnabl
      * - the caller must have the `PAUSER_ROLE`.
      */
     function unpause() public virtual {
-        require(hasRole(PAUSER_ROLE, _msgSender()), "ERC721PresetMinterPauserAutoId: must have pauser role to unpause");
+        require(hasRole(PAUSER_ROLE, Context._msgSender()), "ERC721PresetMinterPauserAutoId: must have pauser role to unpause");
         _unpause();
     }
 

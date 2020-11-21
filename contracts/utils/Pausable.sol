@@ -74,7 +74,7 @@ contract Pausable is Context {
      */
     function _pause() internal virtual whenNotPaused {
         _paused = true;
-        emit Paused(_msgSender());
+        emit Paused(Context._msgSender());
     }
 
     /**
@@ -86,6 +86,6 @@ contract Pausable is Context {
      */
     function _unpause() internal virtual whenPaused {
         _paused = false;
-        emit Unpaused(_msgSender());
+        emit Unpaused(Context._msgSender());
     }
 }

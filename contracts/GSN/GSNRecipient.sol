@@ -86,9 +86,9 @@ abstract contract GSNRecipient is IRelayRecipient, Context {
      * @dev Replacement for msg.sender. Returns the actual sender of a transaction: msg.sender for regular transactions,
      * and the end-user for GSN relayed calls (where msg.sender is actually `RelayHub`).
      *
-     * IMPORTANT: Contracts derived from {GSNRecipient} should never use `msg.sender`, and use {_msgSender} instead.
+     * IMPORTANT: Contracts derived from {GSNRecipient} should never use `msg.sender`, and use {Context._msgSender} instead.
      */
-    function _msgSender() internal view virtual override returns (address payable) {
+    function Context._msgSender() internal view virtual override returns (address payable) {
         if (msg.sender != _relayHub) {
             return msg.sender;
         } else {

@@ -16,6 +16,6 @@ contract GSNRecipientERC20FeeMock is GSNRecipient, GSNRecipientERC20Fee {
     event MockFunctionCalled(uint256 senderBalance);
 
     function mockFunction() public {
-        emit MockFunctionCalled(token().balanceOf(_msgSender()));
+        emit MockFunctionCalled(token().balanceOf(Context._msgSender()));
     }
 }

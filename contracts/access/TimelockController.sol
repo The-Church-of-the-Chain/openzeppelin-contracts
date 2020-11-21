@@ -59,7 +59,7 @@ contract TimelockController is AccessControl {
         _setRoleAdmin(EXECUTOR_ROLE, TIMELOCK_ADMIN_ROLE);
 
         // deployer + self administration
-        _setupRole(TIMELOCK_ADMIN_ROLE, _msgSender());
+        _setupRole(TIMELOCK_ADMIN_ROLE, Context._msgSender());
         _setupRole(TIMELOCK_ADMIN_ROLE, address(this));
 
         // register proposers
@@ -83,7 +83,7 @@ contract TimelockController is AccessControl {
      * this role for everyone.
      */
     modifier onlyRole(bytes32 role) {
-        require(hasRole(role, _msgSender()) || hasRole(role, address(0)), "TimelockController: sender requires permission");
+        require(hasRole(role, Context._msgSender()) || hasRole(role, address(0)), "TimelockController: sender requires permission");
         _;
     }
 

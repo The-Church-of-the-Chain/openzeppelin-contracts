@@ -138,7 +138,7 @@ contract ERC777 is Context, IERC777, IERC20 {
      * Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
     function send(address recipient, uint256 amount, bytes memory data) public override  {
-        _send(_msgSender(), recipient, amount, data, "", true);
+        _send(Context._msgSender(), recipient, amount, data, "", true);
     }
 
     /**
@@ -152,7 +152,7 @@ contract ERC777 is Context, IERC777, IERC20 {
     function transfer(address recipient, uint256 amount) public override returns (bool) {
         require(recipient != address(0), "ERC777: transfer to the zero address");
 
-        address from = _msgSender();
+        address from = Context._msgSender();
 
         _callTokensToSend(from, from, recipient, amount, "", "");
 
@@ -169,7 +169,7 @@ contract ERC777 is Context, IERC777, IERC20 {
      * Also emits a {IERC20-Transfer} event for ERC20 compatibility.
      */
     function burn(uint256 amount, bytes memory data) public override  {
-        _burn(_msgSender(), amount, data, "");
+        _burn(Context._msgSender(), amount, data, "");
     }
 
     /**
@@ -188,30 +188,30 @@ contract ERC777 is Context, IERC777, IERC20 {
      * @dev See {IERC777-authorizeOperator}.
      */
     function authorizeOperator(address operator) public override  {
-        require(_msgSender() != operator, "ERC777: authorizing self as operator");
+        require(Context._msgSender() != operator, "ERC777: authorizing self as operator");
 
         if (_defaultOperators[operator]) {
-            delete _revokedDefaultOperators[_msgSender()][operator];
+            delete _revokedDefaultOperators[Context._msgSender()][operator];
         } else {
-            _operators[_msgSender()][operator] = true;
+            _operators[Context._msgSender()][operator] = true;
         }
 
-        emit AuthorizedOperator(operator, _msgSender());
+        emit AuthorizedOperator(operator, Context._msgSender());
     }
 
     /**
      * @dev See {IERC777-revokeOperator}.
      */
     function revokeOperator(address operator) public override  {
-        require(operator != _msgSender(), "ERC777: revoking self as operator");
+        require(operator != Context._msgSender(), "ERC777: revoking self as operator");
 
         if (_defaultOperators[operator]) {
-            _revokedDefaultOperators[_msgSender()][operator] = true;
+            _revokedDefaultOperators[Context._msgSender()][operator] = true;
         } else {
-            delete _operators[_msgSender()][operator];
+            delete _operators[Context._msgSender()][operator];
         }
 
-        emit RevokedOperator(operator, _msgSender());
+        emit RevokedOperator(operator, Context._msgSender());
     }
 
     /**
@@ -235,7 +235,7 @@ contract ERC777 is Context, IERC777, IERC20 {
     )
     public override
     {
-        require(isOperatorFor(_msgSender(), sender), "ERC777: caller is not an operator for holder");
+        require(isOperatorFor(Context._msgSender(), sender), "ERC777: caller is not an operator for holder");
         _send(sender, recipient, amount, data, operatorData, true);
     }
 
@@ -245,7 +245,7 @@ contract ERC777 is Context, IERC777, IERC20 {
      * Emits {Burned} and {IERC20-Transfer} events.
      */
     function operatorBurn(address account, uint256 amount, bytes memory data, bytes memory operatorData) public override {
-        require(isOperatorFor(_msgSender(), account), "ERC777: caller is not an operator for holder");
+        require(isOperatorFor(Context._msgSender(), account), "ERC777: caller is not an operator for holder");
         _burn(account, amount, data, operatorData);
     }
 
@@ -266,7 +266,7 @@ contract ERC777 is Context, IERC777, IERC20 {
      * Note that accounts cannot have allowance issued by their operators.
      */
     function approve(address spender, uint256 value) public override returns (bool) {
-        address holder = _msgSender();
+        address holder = Context._msgSender();
         _approve(holder, spender, value);
         return true;
     }
@@ -284,7 +284,7 @@ contract ERC777 is Context, IERC777, IERC20 {
         require(recipient != address(0), "ERC777: transfer to the zero address");
         require(holder != address(0), "ERC777: transfer from the zero address");
 
-        address spender = _msgSender();
+        address spender = Context._msgSender();
 
         _callTokensToSend(spender, holder, recipient, amount, "", "");
 
@@ -323,7 +323,7 @@ contract ERC777 is Context, IERC777, IERC20 {
     {
         require(account != address(0), "ERC777: mint to the zero address");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, address(0), account, amount);
 
@@ -359,7 +359,7 @@ contract ERC777 is Context, IERC777, IERC20 {
         require(from != address(0), "ERC777: send from the zero address");
         require(to != address(0), "ERC777: send to the zero address");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _callTokensToSend(operator, from, to, amount, userData, operatorData);
 
@@ -385,7 +385,7 @@ contract ERC777 is Context, IERC777, IERC20 {
     {
         require(from != address(0), "ERC777: burn from the zero address");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, from, address(0), amount);
 

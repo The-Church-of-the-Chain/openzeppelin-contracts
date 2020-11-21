@@ -121,10 +121,10 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * @dev See {IERC1155-setApprovalForAll}.
      */
     function setApprovalForAll(address operator, bool approved) public virtual override {
-        require(_msgSender() != operator, "ERC1155: setting approval status for self");
+        require(Context._msgSender() != operator, "ERC1155: setting approval status for self");
 
-        _operatorApprovals[_msgSender()][operator] = approved;
-        emit ApprovalForAll(_msgSender(), operator, approved);
+        _operatorApprovals[Context._msgSender()][operator] = approved;
+        emit ApprovalForAll(Context._msgSender(), operator, approved);
     }
 
     /**
@@ -150,11 +150,11 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     {
         require(to != address(0), "ERC1155: transfer to the zero address");
         require(
-            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            from == Context._msgSender() || isApprovedForAll(from, Context._msgSender()),
             "ERC1155: caller is not owner nor approved"
         );
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, from, to, _asSingletonArray(id), _asSingletonArray(amount), data);
 
@@ -183,11 +183,11 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
         require(to != address(0), "ERC1155: transfer to the zero address");
         require(
-            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            from == Context._msgSender() || isApprovedForAll(from, Context._msgSender()),
             "ERC1155: transfer caller is not owner nor approved"
         );
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, from, to, ids, amounts, data);
 
@@ -244,7 +244,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     function _mint(address account, uint256 id, uint256 amount, bytes memory data) internal virtual {
         require(account != address(0), "ERC1155: mint to the zero address");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, address(0), account, _asSingletonArray(id), _asSingletonArray(amount), data);
 
@@ -267,7 +267,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         require(to != address(0), "ERC1155: mint to the zero address");
         require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
 
@@ -291,7 +291,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     function _burn(address account, uint256 id, uint256 amount) internal virtual {
         require(account != address(0), "ERC1155: burn from the zero address");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, account, address(0), _asSingletonArray(id), _asSingletonArray(amount), "");
 
@@ -314,7 +314,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         require(account != address(0), "ERC1155: burn from the zero address");
         require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
 
-        address operator = _msgSender();
+        address operator = Context._msgSender();
 
         _beforeTokenTransfer(operator, account, address(0), ids, amounts, "");
 
