@@ -4,18 +4,22 @@ pragma solidity 0.7.4;
 import "hardhat/console.sol";
 
 import "./ERC20.sol";
+import "../../math/SafeMath.sol";
 
 /**
  * @dev Extension of {ERC20} that adds a cap to the supply of tokens.
  */
 abstract contract ERC20Capped is ERC20 {
+    
+    using SafeMath for uint256;
+
     uint256 private _cap;
 
     /**
      * @dev Sets the value of the `cap`. This value is immutable, it can only be
      * set once during construction.
      */
-    constructor (uint256 cap_) public {
+    constructor (uint256 cap_) {
         require(cap_ > 0, "ERC20Capped: cap is 0");
         _cap = cap_;
     }
@@ -37,7 +41,7 @@ abstract contract ERC20Capped is ERC20 {
     function _beforeTokenTransfer(address from_, address to_, uint256 amount_) internal virtual override {
         super._beforeTokenTransfer(from_, to_, amount_);
 
-        if (from == address(0)) { // When minting tokens
+        if (from_ == address(0)) { // When minting tokens
             require(totalSupply().add(amount_) <= _cap, "ERC20Capped: cap exceeded");
         }
     }

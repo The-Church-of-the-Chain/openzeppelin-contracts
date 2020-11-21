@@ -3,8 +3,8 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
-contract ReentrancyAttack is Context {
+import "../security/Context.sol";
+contract ReentrancyAttack {
     function callSender(bytes4 data) public {
         // solhint-disable-next-line avoid-low-level-calls
         (bool success,) = Context._msgSender().call(abi.encodeWithSelector(data));

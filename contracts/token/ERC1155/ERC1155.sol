@@ -6,7 +6,7 @@ import "hardhat/console.sol";
 import "./IERC1155.sol";
 import "./IERC1155MetadataURI.sol";
 import "./IERC1155Receiver.sol";
-import "../../GSN/Context.sol";
+import "../../security/Context.sol";
 import "../../introspection/ERC165.sol";
 import "../../math/SafeMath.sol";
 import "../../utils/Address.sol";
@@ -19,7 +19,7 @@ import "../../utils/Address.sol";
  *
  * _Available since v3.1._
  */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+contract ERC1155 is ERC165, IERC1155, IERC1155MetadataURI {
     using SafeMath for uint256;
     using Address for address;
 
@@ -53,7 +53,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     /**
      * @dev See {_setURI}.
      */
-    constructor (string memory uri_) public {
+    constructor (string memory uri_) {
         _setURI(uri_);
 
         // register the supported interfaces to conform to ERC1155 via ERC165

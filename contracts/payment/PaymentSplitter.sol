@@ -3,7 +3,7 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 import "../math/SafeMath.sol";
 
 /**
@@ -19,7 +19,7 @@ import "../math/SafeMath.sol";
  * accounts but kept in this contract, and the actual transfer is triggered as a separate step by calling the {release}
  * function.
  */
-contract PaymentSplitter is Context {
+contract PaymentSplitter {
     using SafeMath for uint256;
 
     event PayeeAdded(address account, uint256 shares);
@@ -40,13 +40,13 @@ contract PaymentSplitter is Context {
      * All addresses in `payees` must be non-zero. Both arrays must have the same non-zero length, and there must be no
      * duplicates in `payees`.
      */
-    constructor (address[] memory payees, uint256[] memory shares_) public payable {
+    constructor (address[] memory payees_, uint256[] memory shares_) payable {
         // solhint-disable-next-line max-line-length
-        require(payees.length == shares_.length, "PaymentSplitter: payees and shares length mismatch");
-        require(payees.length > 0, "PaymentSplitter: no payees");
+        require(payees_.length == shares_.length, "PaymentSplitter: payees and shares length mismatch");
+        require(payees_.length > 0, "PaymentSplitter: no payees");
 
-        for (uint256 i = 0; i < payees.length; i++) {
-            _addPayee(payees[i], shares[i]);
+        for (uint256 i = 0; i < payees_.length; i++) {
+            _addPayee(payees_[i], shares_[i]);
         }
     }
 

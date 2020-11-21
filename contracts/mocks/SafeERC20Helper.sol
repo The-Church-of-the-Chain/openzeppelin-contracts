@@ -3,11 +3,11 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 import "../token/ERC20/IERC20.sol";
 import "../token/ERC20/SafeERC20.sol";
 
-contract ERC20ReturnFalseMock is Context {
+contract ERC20ReturnFalseMock {
     uint256 private _allowance;
 
     // IERC20's functions are not pure, but these mock implementations are: to prevent Solidity from issuing warnings,
@@ -35,7 +35,7 @@ contract ERC20ReturnFalseMock is Context {
     }
 }
 
-contract ERC20ReturnTrueMock is Context {
+contract ERC20ReturnTrueMock {
     mapping (address => uint256) private _allowances;
 
     // IERC20's functions are not pure, but these mock implementations are: to prevent Solidity from issuing warnings,
@@ -66,7 +66,7 @@ contract ERC20ReturnTrueMock is Context {
     }
 }
 
-contract ERC20NoReturnMock is Context {
+contract ERC20NoReturnMock {
     mapping (address => uint256) private _allowances;
 
     // IERC20's functions are not pure, but these mock implementations are: to prevent Solidity from issuing warnings,
@@ -94,13 +94,13 @@ contract ERC20NoReturnMock is Context {
     }
 }
 
-contract SafeERC20Wrapper is Context {
+contract SafeERC20Wrapper {
     using SafeERC20 for IERC20;
 
     IERC20 private _token;
 
-    constructor (IERC20 token) public {
-        _token = token;
+    constructor (IERC20 token_) {
+        _token = token_;
     }
 
     function transfer() public {

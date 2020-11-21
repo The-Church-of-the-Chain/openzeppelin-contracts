@@ -4,7 +4,7 @@ pragma solidity 0.7.4;
 import "hardhat/console.sol";
 
 import "../utils/Address.sol";
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 /**
  * @dev Contract module which provides a basic access control mechanism, where
  * there is an account (an owner) that can be granted exclusive access to
@@ -17,7 +17,7 @@ import "../GSN/Context.sol";
  * `onlyOwner`, which can be applied to your functions to restrict their use to
  * the owner.
  */
-contract Ownable is Context {
+contract Ownable {
     
     using Address for address;
     
@@ -28,7 +28,7 @@ contract Ownable is Context {
     /**
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
-    constructor () internal {
+    constructor () {
         address msgSender = Context._msgSender();
         _owner = msgSender;
         emit OwnershipTransferred(address(0), msgSender);

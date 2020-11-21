@@ -3,7 +3,7 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../../GSN/Context.sol";
+import "../../security/Context.sol";
 import "./IERC777.sol";
 import "./IERC777Recipient.sol";
 import "./IERC777Sender.sol";
@@ -27,7 +27,7 @@ import "../../introspection/IERC1820Registry.sol";
  * are no special restrictions in the amount of tokens that created, moved, or
  * destroyed. This makes integration with ERC20 applications seamless.
  */
-contract ERC777 is Context, IERC777, IERC20 {
+contract ERC777 is IERC777, IERC20 {
     using SafeMath for uint256;
     using Address for address;
 
@@ -71,7 +71,7 @@ contract ERC777 is Context, IERC777, IERC20 {
         string memory name_,
         string memory symbol_,
         address[] memory defaultOperators_
-    ) public {
+    ) {
         _name = name_;
         _symbol = symbol_;
 

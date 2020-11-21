@@ -3,17 +3,17 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 import "../token/ERC777/ERC777.sol";
 
-contract ERC777Mock is Context, ERC777 {
+contract ERC777Mock is ERC777 {
     constructor(
         address initialHolder,
         uint256 initialBalance,
         string memory name,
         string memory symbol,
         address[] memory defaultOperators
-    ) public ERC777(name, symbol, defaultOperators) {
+    ) ERC777(name, symbol, defaultOperators) {
         _mint(initialHolder, initialBalance, "", "");
     }
 

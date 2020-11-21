@@ -4,7 +4,7 @@ pragma solidity 0.7.4;
 import "hardhat/console.sol";
 
 import "../access/AccessControl.sol";
-import "../GSN/Context.sol";
+import "../security/Context.sol";
 import "../token/ERC1155/ERC1155.sol";
 import "../token/ERC1155/ERC1155Burnable.sol";
 import "../token/ERC1155/ERC1155Pausable.sol";
@@ -23,7 +23,7 @@ import "../token/ERC1155/ERC1155Pausable.sol";
  * roles, as well as the default admin role, which will let it grant both minter
  * and pauser roles to other accounts.
  */
-contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, ERC1155Pausable {
+contract ERC1155PresetMinterPauser is AccessControl, ERC1155Burnable, ERC1155Pausable {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
 
@@ -31,7 +31,7 @@ contract ERC1155PresetMinterPauser is Context, AccessControl, ERC1155Burnable, E
      * @dev Grants `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE`, and `PAUSER_ROLE` to the account that
      * deploys the contract.
      */
-    constructor(string memory uri) public ERC1155(uri) {
+    constructor(string memory uri) ERC1155(uri) {
         _setupRole(DEFAULT_ADMIN_ROLE, Context._msgSender());
 
         _setupRole(MINTER_ROLE, Context._msgSender());

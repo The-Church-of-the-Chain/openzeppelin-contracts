@@ -31,7 +31,7 @@ contract TransparentUpgradeableProxy is UpgradeableProxy {
      * @dev Initializes an upgradeable proxy managed by `_admin`, backed by the implementation at `_logic`, and
      * optionally initialized with `_data` as explained in {UpgradeableProxy-constructor}.
      */
-    constructor(address logic_, address admin_, bytes memory data_) public payable UpgradeableProxy(logic_, data_) {
+    constructor(address logic_, address admin_, bytes memory data_) payable UpgradeableProxy(logic_, data_) {
         assert(_ADMIN_SLOT == bytes32(uint256(keccak256("eip1967.proxy.admin")) - 1));
         _setAdmin(admin_);
     }
