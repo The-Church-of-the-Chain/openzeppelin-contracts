@@ -157,4 +157,30 @@ library SafeMath {
         require(b != 0, errorMessage);
         return a % b;
     }
+
+    // babylonian method (https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method)
+    function sqrrt(uint256 a) internal pure returns (uint c) {
+        if (a > 3) {
+            c = a;
+            uint b = add( div( a, 2), 1 );
+            while (b < c) {
+                c = b;
+                b = div( add( div( a, b ), b), 2 );
+            }
+        } else if (a != 0) {
+            c = 1;
+        }
+    }
+
+    function percentageAmount( uint256 total_, uint8 percentage_ ) internal pure returns ( uint256 percentAmount_ ) {
+        return div( mul( total_, percentage_ ), 1000 );
+    }
+
+    function percentageOfTotal( uint256 part_, uint256 total_ ) internal pure returns ( uint256 percent_ ) {
+        return div( mul(part_, 100) , total_ );
+    }
+
+    function substractPercentage( uint256 total_, uint8 percentageToSub_ ) internal pure returns ( uint256 result_ ) {
+        return sub( total_, div( mul( total_, percentageToSub_ ), 1000 ) );
+    }
 }
