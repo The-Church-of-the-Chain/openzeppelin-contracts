@@ -34,15 +34,15 @@ import "../../math/SafeMath.sol";
 contract ERC20 is IERC20 {
     using SafeMath for uint256;
 
-    mapping (address => uint256) private _balances;
+    mapping (address => uint256) internal _balances;
 
-    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping (address => mapping (address => uint256)) internal _allowances;
 
-    uint256 private _totalSupply;
+    uint256 internal _totalSupply;
 
-    string private _name;
-    string private _symbol;
-    uint8 private _decimals;
+    string internal _name;
+    string internal _symbol;
+    uint8 internal _decimals;
 
     /**
      * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
@@ -210,11 +210,11 @@ contract ERC20 is IERC20 {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
-        _beforeTokenTransfer(sender, recipient, amount);
+        uint256 amountAfterBeforeTokenTransfer_ = _beforeTokenTransfer(sender, recipient, amount);
 
-        _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
-        _balances[recipient] = _balances[recipient].add(amount);
-        emit Transfer(sender, recipient, amount);
+        _balances[sender] = _balances[sender].sub(amountAfterBeforeTokenTransfer_, "ERC20: transfer amount exceeds balance");
+        _balances[recipient] = _balances[recipient].add(amountAfterBeforeTokenTransfer_);
+        emit Transfer(sender, recipient, amountAfterBeforeTokenTransfer_);
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
@@ -229,7 +229,7 @@ contract ERC20 is IERC20 {
     function _mint(address account, uint256 amount) internal virtual {
         require(account != address(0), "ERC20: mint to the zero address");
 
-        _beforeTokenTransfer(address(0), account, amount);
+        // _beforeTokenTransfer(address(0), account, amount);
 
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
