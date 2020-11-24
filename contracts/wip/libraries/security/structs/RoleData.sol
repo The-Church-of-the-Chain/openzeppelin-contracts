@@ -5,7 +5,7 @@
 // import "../../dataTypes/collections/Bytes32Set.sol";
 
 // // TODO: Better description
-// // TODO: RoleData - roleApproval bool should be a struct containing data about who approved etc. for more information .
+// // TODO: RoleData - approved bool should be a struct containing data about who approved etc. for more information .
 
 // /**
 //  * @notice Datatype for reuse in the authroization system.
@@ -19,7 +19,7 @@
 //         bytes32 admin;
 //         bytes32 approver;
 //         AddressSet.AddressSet members;
-//         Bytes32Set.Bytes32Set restrictedSharedRoles;    // TODO: Better name
+//         Bytes32Set.Bytes32Set restrictedSharedRoles;    // TODO: Better name,         // TODO: Loops are evil. Change data struct to some form of mapping?
 //         mapping(address => bool) approved;
 //     }
 
