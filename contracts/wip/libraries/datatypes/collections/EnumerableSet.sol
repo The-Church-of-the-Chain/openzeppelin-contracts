@@ -50,7 +50,7 @@
 //      * Returns true if the value was added to the set, that is if it was not
 //      * already present.
 //      */
-//     function _add(Set storage set, bytes32 value) private returns (bool) {
+//     function _add(Set storage set, bytes32 value) internal returns (bool) {
 //         if (!_contains(set, value)) {
 //             set._values.push(value);
 //             // The value is stored at length-1, but we add 1 to all indexes
