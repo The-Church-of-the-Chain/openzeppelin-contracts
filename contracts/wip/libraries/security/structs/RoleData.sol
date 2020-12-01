@@ -67,9 +67,9 @@ library RoleData {
         return self.members.contains( member );
     }
     
-    function createRole( Role storage self, bytes32 admin_, bytes32 approver_ ) internal {
-        self.admin = admin_;
-        self.approver = approver_;
+    function createRole( Role storage self, bytes32 admin, bytes32 approver ) internal {
+        self.admin = admin;
+        self.approver = approver;
     }
 
 }
