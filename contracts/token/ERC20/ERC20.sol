@@ -210,11 +210,11 @@ contract ERC20 is IERC20 {
         require(sender != address(0), "ERC20: transfer from the zero address");
         require(recipient != address(0), "ERC20: transfer to the zero address");
 
-        uint256 amountAfterBeforeTokenTransfer_ = _beforeTokenTransfer(sender, recipient, amount);
+        _beforeTokenTransfer(sender, recipient, amount);
 
-        _balances[sender] = _balances[sender].sub(amountAfterBeforeTokenTransfer_, "ERC20: transfer amount exceeds balance");
-        _balances[recipient] = _balances[recipient].add(amountAfterBeforeTokenTransfer_);
-        emit Transfer(sender, recipient, amountAfterBeforeTokenTransfer_);
+        _balances[sender] = _balances[sender].sub(amount, "ERC20: transfer amount exceeds balance");
+        _balances[recipient] = _balances[recipient].add(amount);
+        emit Transfer(sender, recipient, amount);
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
