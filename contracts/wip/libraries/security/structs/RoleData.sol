@@ -15,7 +15,7 @@ library RoleData {
         bytes32 admin;
         bytes32 approver;
         AddressSet.Set members;
-        Bytes32Set.Set restrictedRoles;    // TODO: Loops are evil. Change data struct to some form of mapping?
+        Bytes32Set.Set restrictedRoles;    // TODO: Could create Account mapping which contains role => bool for a quick reverse lookup but now manage 2 locations
         mapping(address => bool) approved;
     }
 
