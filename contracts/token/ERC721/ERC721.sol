@@ -11,7 +11,7 @@ import "./IERC721Receiver.sol";
 import "../../introspection/ERC165.sol";
 import "../../utils/math/SafeMath.sol";
 import "../../utils/Address.sol";
-import "../../utils/EnumerableSet.sol";
+import "../../datatypes/collections/EnumerableSet.sol";
 import "../../utils/EnumerableMap.sol";
 import "../../utils/Strings.sol";
 
