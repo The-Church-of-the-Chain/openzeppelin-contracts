@@ -3,7 +3,7 @@ pragma solidity 0.7.4;
 
 import "hardhat/console.sol";
 
-import "../utils/EnumerableSet.sol";
+import "../datatypes/collections/EnumerableSet.sol";
 
 // AddressSet
 contract EnumerableAddressSetMock {

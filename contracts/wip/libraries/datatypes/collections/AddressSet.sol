@@ -1,14 +1,14 @@
-// // SPDX-License-Identifier: AGPL-3.0-or-later
-// pragma solidity 0.7.4;
+// // // SPDX-License-Identifier: AGPL-3.0-or-later
+// // pragma solidity 0.7.4;
 
-// import "./EnumerableSet.sol";
+// // import "./EnumerableSet.sol";
 
 // library AddressSet {
 
-//     using EnumerbaleSet for EnumerabletSet.Set;
+//     using EnumerableSet for EnumerableSet.Set;
 
-//     struct AddressSet {
-//         Set _inner;
+//     struct Set {
+//         EnumerableSet.Set _inner;
 //     }
 
 //     /**
@@ -17,8 +17,8 @@
 //      * Returns true if the value was added to the set, that is if it was not
 //      * already present.
 //      */
-//     function add(AddressSet storage set, address value) internal returns (bool) {
-//         return _add(set._inner, bytes32(uint256(value)));
+//     function add(Set storage set, address value) internal returns ( bool ) {
+//         return set._inner._add(bytes32(uint256(value)));
 //     }
 
 //     /**
@@ -27,22 +27,22 @@
 //      * Returns true if the value was removed from the set, that is if it was
 //      * present.
 //      */
-//     function remove(AddressSet storage set, address value) internal returns (bool) {
-//         return _remove(set._inner, bytes32(uint256(value)));
+//     function remove(Set storage set, address value) internal returns ( bool ) {
+//         return set._inner._remove(bytes32(uint256(value)));
 //     }
 
 //     /**
 //      * @dev Returns true if the value is in the set. O(1).
 //      */
-//     function contains(AddressSet storage set, address value) internal view returns (bool) {
-//         return _contains(set._inner, bytes32(uint256(value)));
+//     function contains(Set storage set, address value) internal view returns ( bool ) {
+//         return set._inner._contains(bytes32(uint256(value)));
 //     }
 
 //     /**
 //      * @dev Returns the number of values in the set. O(1).
 //      */
-//     function length(AddressSet storage set) internal view returns (uint256) {
-//         return _length(set._inner);
+//     function length(Set storage set) internal view returns ( uint256 ) {
+//         return set._inner._length();
 //     }
 
 //     /**
@@ -55,7 +55,7 @@
 //      *
 //      * - `index` must be strictly less than {length}.
 //      */
-//     function at(AddressSet storage set, uint256 index) internal view returns (address) {
-//         return address(uint256(_at(set._inner, index)));
+//     function at(Set storage set, uint256 index) internal view returns ( address ) {
+//         return address(uint256(set._inner._at(index)));
 //     }
 // }
