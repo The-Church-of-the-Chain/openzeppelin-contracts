@@ -180,7 +180,18 @@ library SafeMath {
         return div( mul(part_, 100) , total_ );
     }
 
+    /*
+     * Expects percentage to be trailed by 00,
+    */
     function substractPercentage( uint256 total_, uint8 percentageToSub_ ) internal pure returns ( uint256 result_ ) {
         return sub( total_, div( mul( total_, percentageToSub_ ), 1000 ) );
+    }
+
+    function quadraticPricing( uint256 multiplier_, uint256 payment_ ) internal pure returns (uint256) {
+        return sqrrt( mul( multiplier_, payment_ ) );
+    }
+
+    function bondingCurve( uint256 multiplier_, uint256 supply_ ) internal pure returns (uint256) {
+        return mul( multiplier_, supply_ );
     }
 }

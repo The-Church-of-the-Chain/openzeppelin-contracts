@@ -3,25 +3,19 @@
  * Mainnet: at0x1a6184CD4C5Bea62B0116de7962EE7315B7bcBce
  * Rinkerby: 0x92482Ba45A4D2186DafB486b322C6d0B88410FE7
 */
-// TODO Update to latest Solidity compiler.
 // TODO Update to use SafeMath version of new intelligent primitives auto-boxers.
 // Might need to be redeployed on mainnet if update is significant.
-pragma solidity ^0.4.16;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.7.4;
+
+import "../../libraries/datatypes/time/DateTime.sol";
 
 contract SafeDateTime {
         /*
          *  Date and Time utilities for ethereum contracts
          *
          */
-        struct _DateTime {
-                uint16 year;
-                uint8 month;
-                uint8 day;
-                uint8 hour;
-                uint8 minute;
-                uint8 second;
-                uint8 weekday;
-        }
+        using DateTime for DateTime.DateTime;
 
         uint constant DAY_IN_SECONDS = 86400;
         uint constant YEAR_IN_SECONDS = 31536000;
@@ -65,7 +59,7 @@ contract SafeDateTime {
                 }
         }
 
-        function parseTimestamp(uint timestamp) internal pure returns (_DateTime dt) {
+        function parseTimestamp(uint timestamp) internal pure returns ( DateTime.DateTime memory dt) {
                 uint secondsAccountedFor = 0;
                 uint buf;
                 uint8 i;
